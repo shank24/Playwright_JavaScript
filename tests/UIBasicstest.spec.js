@@ -4,7 +4,7 @@ test("Browser Context Test", async ({ browser }) => {
 
     const context = await browser.newContext();
     const page = await context.newPage();
-    await page.goto("https://rahulshettyacademy.com/")
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
     console.log(await getTitle(page));
 
 });
