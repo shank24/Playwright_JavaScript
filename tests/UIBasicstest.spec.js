@@ -9,7 +9,9 @@ test.only("Browser Context Test", async ({ browser }) => {
     await page.locator('#username').fill("rahulshetty");
     await page.locator("[type='password']").fill("learning");
     await page.locator('#signInBtn').click();
-    console.log(await page.locator("[style*='block']").textContent());
+    let not_Found_Locator =  "[style*='block']";
+    console.log(await page.locator(not_Found_Locator).textContent());
+    await expect(page.locator(not_Found_Locator)).toContainText('Incorrect');
     
 });
 
