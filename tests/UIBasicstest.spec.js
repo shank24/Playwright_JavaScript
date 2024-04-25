@@ -8,6 +8,7 @@ test.only("Browser Context Test", async ({ browser }) => {
     const userName = page.locator('#username'); 
     const password = page.locator("[type='password']");
     const signIn = page.locator('#signInBtn');
+    const cardTitle = page.locator(".card-body a");
 
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
     console.log(await getTitle(page));
@@ -26,7 +27,7 @@ test.only("Browser Context Test", async ({ browser }) => {
     await userName.fill("rahulshettyacademy")
     await signIn.click();
 
-    console.log(await page.locator(".card-body a").nth(0).textContent());
+    console.log(await cardTitle.nth(0).textContent());
     
 });
 
