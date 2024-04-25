@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test.only("Browser Context Test", async ({ browser }) => {
+test("Browser Context Test", async ({ browser }) => {
 
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -10,7 +10,7 @@ test.only("Browser Context Test", async ({ browser }) => {
     const signIn = page.locator('#signInBtn');
     const cardTitle = page.locator(".card-body a");
 
-    await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
+    await getUrl(page,"https://rahulshettyacademy.com/loginpagePractise/");
     console.log(await getTitle(page));
 
     await userName.fill("rahulshetty");
@@ -28,8 +28,32 @@ test.only("Browser Context Test", async ({ browser }) => {
     await signIn.click();
 
     console.log(await cardTitle.nth(0).textContent());
+    console.log(await cardTitle.allTextContents());
     
 });
+
+test.only("Assignment Test", async ({ browser }) => {
+
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    const userName = page.locator("#userEmail"); 
+    const password = page.locator("#userPassword");
+    const signIn = page.locator('#login');
+    const cardTitle = page.locator(".card-body b");
+
+    await getUrl(page,"https://rahulshettyacademy.com/client/");
+    console.log(await getTitle(page));
+
+    await userName.fill("creativestrikers@gmail.com");
+    await password.fill("Abcd@1234");
+    await signIn.click();
+
+    console.log(await cardTitle.nth(0).textContent());
+    console.log(await cardTitle.allTextContents());
+    
+});
+
 
 test("Page Test", async ({ page }) => {
 
@@ -40,6 +64,10 @@ test("Page Test", async ({ page }) => {
     
 
 });
+
+async function getUrl(page, url) {
+    await page.goto(url);
+}
 
 async function getTitle(page) {
     return await page.title();
