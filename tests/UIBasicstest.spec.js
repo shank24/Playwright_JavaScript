@@ -4,14 +4,29 @@ test.only("Browser Context Test", async ({ browser }) => {
 
     const context = await browser.newContext();
     const page = await context.newPage();
+
+    const userName = page.locator('#username'); 
+    const password = page.locator("[type='password']");
+    const signIn = page.locator('#signInBtn');
+
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/")
     console.log(await getTitle(page));
-    await page.locator('#username').fill("rahulshetty");
-    await page.locator("[type='password']").fill("learning");
-    await page.locator('#signInBtn').click();
-    let not_Found_Locator =  "[style*='block']";
+
+    await userName.fill("rahulshetty");
+    await password.fill("learning");
+    await signIn.click();
+
+    let not_Found_Locator =  "[style*='block']"; 
     console.log(await page.locator(not_Found_Locator).textContent());
     await expect(page.locator(not_Found_Locator)).toContainText('Incorrect');
+    
+    //await userName.fill("");
+    await userName.clear();
+    
+    await userName.fill("rahulshettyacademy")
+    await signIn.click();
+
+    console.log(await page.locator(".card-body a").nth(0).textContent());
     
 });
 
