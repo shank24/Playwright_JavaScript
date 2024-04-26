@@ -76,7 +76,11 @@ test.only("UI Controls Test", async ({ page }) => {
     //await page.locator('x-details', { hasText: 'Details' }).click();
     await radioBtn.click();
     await okayBtn.click();
-    await page.pause();
+    expect(radioBtn).toBeChecked();
+    console.log(await radioBtn.isChecked());
+    console.log(await radioBtn.isVisible());
+    
+    //await page.pause();
 
 
 });
