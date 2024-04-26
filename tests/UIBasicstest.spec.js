@@ -32,7 +32,7 @@ test("Browser Context Test", async ({ browser }) => {
     
 });
 
-test.only("Assignment Test", async ({ browser }) => {
+test("Assignment Test", async ({ browser }) => {
 
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -48,12 +48,36 @@ test.only("Assignment Test", async ({ browser }) => {
     await userName.fill("creativestrikers@gmail.com");
     await password.fill("Abcd@1234");
     await signIn.click();
+    await page.waitForLoadState('networkidle');
 
-    console.log(await cardTitle.nth(0).textContent());
+    //console.log(await cardTitle.nth(0).textContent());
     console.log(await cardTitle.allTextContents());
     
 });
 
+
+test.only("UI Controls Test", async ({ page }) => {
+
+
+    const userName = page.locator('#username'); 
+    const password = page.locator("[type='password']");
+    const signIn = page.locator('#signInBtn');
+    const dropDown = page.locator("select.form-control");
+    const radioBtn = page.locator('span.radiotextsty' , { hasText: ' User' });
+
+    await getUrl(page,"https://rahulshettyacademy.com/loginpagePractise/");
+    console.log(await getTitle(page));
+    
+    
+    await userName.fill("rahulshetty");
+    await password.fill("learning");
+    await dropDown.selectOption("consult");
+    //await page.locator('x-details', { hasText: 'Details' }).click();
+    await radioBtn.click();
+    await page.pause();
+
+
+});
 
 test("Page Test", async ({ page }) => {
 
@@ -61,8 +85,6 @@ test("Page Test", async ({ page }) => {
     const getTitleToMatch = await getTitle(page);
     console.log(await getTitle(page));
     await expect(page).toHaveTitle(getTitleToMatch)
-    
-
 });
 
 async function getUrl(page, url) {
