@@ -64,6 +64,7 @@ test.only("UI Controls Test", async ({ page }) => {
     const signIn = page.locator('#signInBtn');
     const dropDown = page.locator("select.form-control");
     const radioBtn = page.locator('span.radiotextsty' , { hasText: ' User' });
+    const okayBtn = page.locator('#okayBtn');
 
     await getUrl(page,"https://rahulshettyacademy.com/loginpagePractise/");
     console.log(await getTitle(page));
@@ -74,6 +75,7 @@ test.only("UI Controls Test", async ({ page }) => {
     await dropDown.selectOption("consult");
     //await page.locator('x-details', { hasText: 'Details' }).click();
     await radioBtn.click();
+    await okayBtn.click();
     await page.pause();
 
 
