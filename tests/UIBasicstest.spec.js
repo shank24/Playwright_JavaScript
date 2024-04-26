@@ -5,31 +5,31 @@ test("Browser Context Test", async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
-    const userName = page.locator('#username'); 
+    const userName = page.locator('#username');
     const password = page.locator("[type='password']");
     const signIn = page.locator('#signInBtn');
     const cardTitle = page.locator(".card-body a");
 
-    await getUrl(page,"https://rahulshettyacademy.com/loginpagePractise/");
+    await getUrl(page, "https://rahulshettyacademy.com/loginpagePractise/");
     console.log(await getTitle(page));
 
     await userName.fill("rahulshetty");
     await password.fill("learning");
     await signIn.click();
 
-    let not_Found_Locator =  "[style*='block']"; 
+    let not_Found_Locator = "[style*='block']";
     console.log(await page.locator(not_Found_Locator).textContent());
     await expect(page.locator(not_Found_Locator)).toContainText('Incorrect');
-    
+
     //await userName.fill("");
     await userName.clear();
-    
+
     await userName.fill("rahulshettyacademy")
     await signIn.click();
 
     console.log(await cardTitle.nth(0).textContent());
     console.log(await cardTitle.allTextContents());
-    
+
 });
 
 test("Assignment Test", async ({ browser }) => {
@@ -37,12 +37,12 @@ test("Assignment Test", async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
-    const userName = page.locator("#userEmail"); 
+    const userName = page.locator("#userEmail");
     const password = page.locator("#userPassword");
     const signIn = page.locator('#login');
     const cardTitle = page.locator(".card-body b");
 
-    await getUrl(page,"https://rahulshettyacademy.com/client/");
+    await getUrl(page, "https://rahulshettyacademy.com/client/");
     console.log(await getTitle(page));
 
     await userName.fill("creativestrikers@gmail.com");
@@ -52,39 +52,40 @@ test("Assignment Test", async ({ browser }) => {
 
     //console.log(await cardTitle.nth(0).textContent());
     console.log(await cardTitle.allTextContents());
-    
+
 });
 
 
 test.only("UI Controls Test", async ({ page }) => {
 
 
-    const userName = page.locator('#username'); 
+    const userName = page.locator('#username');
     const password = page.locator("[type='password']");
     const signIn = page.locator('#signInBtn');
     const dropDown = page.locator("select.form-control");
-    const radioBtn = page.locator('span.radiotextsty' , { hasText: ' User' });
+    const radioBtn = page.locator('span.radiotextsty', { hasText: ' User' });
     const okayBtn = page.locator('#okayBtn');
     const checkBox = page.locator('#terms');
+    const documentLink = page.locator("[href*='documents-request']");
 
-    await getUrl(page,"https://rahulshettyacademy.com/loginpagePractise/");
+    await getUrl(page, "https://rahulshettyacademy.com/loginpagePractise/");
     console.log(await getTitle(page));
-    
-    
+
+
     await userName.fill("rahulshetty");
     await password.fill("learning");
 
     //Drop Down
     await dropDown.selectOption("consult");
     //await page.locator('x-details', { hasText: 'Details' }).click();
-    
+
     //Radio Button
     await radioBtn.click();
     await okayBtn.click();
     expect(radioBtn).toBeChecked();
     await isChecked(radioBtn);
     await isVisible(radioBtn);
-    
+
     //Check-Box
     await checkBox.click();
     await isChecked(checkBox);
@@ -92,6 +93,8 @@ test.only("UI Controls Test", async ({ page }) => {
     await checkBox.uncheck();
     expect(await isChecked(radioBtn)).toBeFalsy();
     //await page.pause();
+
+    await expect(documentLink).toHaveAttribute('class', 'blinkingText');
 
 
 });
