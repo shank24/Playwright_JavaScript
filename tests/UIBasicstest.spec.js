@@ -65,6 +65,7 @@ test.only("UI Controls Test", async ({ page }) => {
     const dropDown = page.locator("select.form-control");
     const radioBtn = page.locator('span.radiotextsty' , { hasText: ' User' });
     const okayBtn = page.locator('#okayBtn');
+    const checkBox = page.locator('#terms');
 
     await getUrl(page,"https://rahulshettyacademy.com/loginpagePractise/");
     console.log(await getTitle(page));
@@ -72,14 +73,24 @@ test.only("UI Controls Test", async ({ page }) => {
     
     await userName.fill("rahulshetty");
     await password.fill("learning");
+
+    //Drop Down
     await dropDown.selectOption("consult");
     //await page.locator('x-details', { hasText: 'Details' }).click();
+    
+    //Radio Button
     await radioBtn.click();
     await okayBtn.click();
     expect(radioBtn).toBeChecked();
-    console.log(await radioBtn.isChecked());
-    console.log(await radioBtn.isVisible());
+    await isChecked(radioBtn);
+    await isVisible(radioBtn);
     
+    //Check-Box
+    await checkBox.click();
+    await isChecked(checkBox);
+    await isVisible(checkBox);
+    await checkBox.uncheck();
+    expect(await isChecked(radioBtn)).toBeFalsy();
     //await page.pause();
 
 
@@ -92,6 +103,14 @@ test("Page Test", async ({ page }) => {
     console.log(await getTitle(page));
     await expect(page).toHaveTitle(getTitleToMatch)
 });
+
+async function isVisible(radioBtn) {
+    console.log(await radioBtn.isVisible());
+}
+
+async function isChecked(radioBtn) {
+    console.log(await radioBtn.isChecked());
+}
 
 async function getUrl(page, url) {
     await page.goto(url);
