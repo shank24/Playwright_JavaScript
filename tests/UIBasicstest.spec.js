@@ -32,28 +32,6 @@ test("Browser Context Test", async ({ browser }) => {
 
 });
 
-test("Assignment Test", async ({ browser }) => {
-
-    const context = await browser.newContext();
-    const page = await context.newPage();
-
-    const userName = page.locator("#userEmail");
-    const password = page.locator("#userPassword");
-    const signIn = page.locator('#login');
-    const cardTitle = page.locator(".card-body b");
-
-    await getUrl(page, "https://rahulshettyacademy.com/client/");
-    console.log(await getTitle(page));
-
-    await userName.fill("creativestrikers@gmail.com");
-    await password.fill("Abcd@1234");
-    await signIn.click();
-    await page.waitForLoadState('networkidle');
-
-    //console.log(await cardTitle.nth(0).textContent());
-    console.log(await cardTitle.allTextContents());
-
-});
 
 
 test.only("UI Controls Test", async ({ page }) => {
@@ -70,8 +48,6 @@ test.only("UI Controls Test", async ({ page }) => {
 
     await getUrl(page, "https://rahulshettyacademy.com/loginpagePractise/");
     console.log(await getTitle(page));
-
-
     await userName.fill("rahulshetty");
     await password.fill("learning");
 
@@ -93,7 +69,6 @@ test.only("UI Controls Test", async ({ page }) => {
     await checkBox.uncheck();
     expect(await isChecked(radioBtn)).toBeFalsy();
     //await page.pause();
-
     await expect(documentLink).toHaveAttribute('class', 'blinkingText');
 
 
