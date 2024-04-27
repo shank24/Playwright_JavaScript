@@ -82,6 +82,8 @@ test("Page Test", async ({ page }) => {
     await expect(page).toHaveTitle(getTitleToMatch)
 });
 
+// Methods
+
 async function isVisible(radioBtn) {
     console.log(await radioBtn.isVisible());
 }

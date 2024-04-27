@@ -25,6 +25,7 @@ test.only("Assignment Test", async ({ browser }) => {
 
 });
 
+// Methods
 
 async function isVisible(radioBtn) {
     console.log(await radioBtn.isVisible());
