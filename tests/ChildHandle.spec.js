@@ -16,6 +16,14 @@ test.only("Child Window Handle Test", async ({ browser }) => {
     ]) //New Page is opened
 
     const text = await newPage.locator(".red").textContent();
+    const arrayText = text.split("@");
+    console.log(arrayText);
+    const domain = arrayText[1].split(" ")[0]
+    const name = email.split(".")[0];
+
+    console.log(domain);
+    console.log(name);
+    
     console.log(text);
 });
 
