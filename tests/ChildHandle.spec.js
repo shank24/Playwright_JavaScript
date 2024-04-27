@@ -7,6 +7,7 @@ test.only("Child Window Handle Test", async ({ browser }) => {
     
     await getUrl(page, "https://rahulshettyacademy.com/loginpagePractise/");
     const documentLink = page.locator("[href*='documents-request']");
+    const userName = page.locator('#username');
     
 
     //Wait For event to happen - a new page
@@ -17,14 +18,18 @@ test.only("Child Window Handle Test", async ({ browser }) => {
 
     const text = await newPage.locator(".red").textContent();
     const arrayText = text.split("@");
-    console.log(arrayText);
+    //console.log(arrayText);
     const domain = arrayText[1].split(" ")[0]
-    const name = email.split(".")[0];
+    const name = domain.split(".")[0];
 
-    console.log(domain);
-    console.log(name);
-    
-    console.log(text);
+    //console.log(domain);
+    //console.log(name);
+    //console.log(text);
+
+    //Switching Back to Parent Page
+    await userName.fill(domain);
+    //await page.pause();
+    console.log(await userName.textContent());
 });
 
 
