@@ -16,6 +16,8 @@ test.only("Assignment Test", async ({ browser }) => {
     const cardTitle = page.locator(".card-body b");
     const productName = 'ZARA COAT 3';
     const cartLocator = page.locator("[routerlink*='cart']");
+    const checkOutBtn = page.locator("text=Checkout");
+    const country = page.locator("[placeholder*='Country']");
 
 
     await getUrl(page, "https://rahulshettyacademy.com/client/");
@@ -32,20 +34,35 @@ test.only("Assignment Test", async ({ browser }) => {
     const countOfProducts = await products.count();
 
     for (let i = 0; i < countOfProducts; i++) {
-        if(await products.nth(i).locator('b').textContent() == productName)
-        {
+        if (await products.nth(i).locator('b').textContent() == productName) {
             //Add To cart
             await products.nth(i).locator("text= Add To Cart").click();
             break;
-        }        
+        }
     }
 
     await cartLocator.click();
     //Page Loads
     await page.locator("div li").first().waitFor();
-    
-    const isPresent =  page.locator ("h3:has-text('ZARA COAT 3')").isVisible();
-    expect (isPresent).toBeTruthy();
+
+    const isPresent = page.locator("h3:has-text('ZARA COAT 3')").isVisible();
+    expect(isPresent).toBeTruthy();
+
+    await checkOutBtn.click();
+    await country.pressSequentially("Can");
+    const dropDown = page.locator(".ta-results");
+    await dropDown.waitFor();
+    const optionsCount = await dropDown.locator("button").count();
+
+    for (let index = 0; index < optionsCount; index++) {
+        const text = await dropDown.locator("button").nth(index).textContent();
+
+        if (text === " Canada") {
+            await dropDown.locator("button").nth(index).click();
+            break;
+        }
+    }
+    await page.pause();
 
 
 });
