@@ -21,6 +21,7 @@ test.only("Assignment Test", async ({ browser }) => {
     const checkOutBtn = page.locator("text=Checkout");
     const country = page.locator("[placeholder*='Country']");
     const placeOrderBtn = page.locator('.action__submit');
+    const orderIdLocator = page.locator('.em-spacer-1 .ng-star-inserted');
 
     await getUrl(page, "https://rahulshettyacademy.com/client/");
     console.log(await getTitle(page));
@@ -69,6 +70,8 @@ test.only("Assignment Test", async ({ browser }) => {
     await placeOrderBtn.click();
     const successMsg = page.locator("h1:has-text(' Thankyou for the order. ')").isVisible();
     expect(successMsg).toBeTruthy();
+    const orderID = await orderIdLocator.textContent();
+    console.log(orderID);
     //await page.pause();
 
 
