@@ -11,6 +11,8 @@ test.only("Assignment Test", async ({ browser }) => {
     const userName = page.locator("#userEmail");
     const password = page.locator("#userPassword");
     const signIn = page.locator('#login');
+    const email = "creativestrikers@gmail.com";
+
     //Cart Locators
     const products = page.locator(".card-body")
     const cardTitle = page.locator(".card-body b");
@@ -18,12 +20,12 @@ test.only("Assignment Test", async ({ browser }) => {
     const cartLocator = page.locator("[routerlink*='cart']");
     const checkOutBtn = page.locator("text=Checkout");
     const country = page.locator("[placeholder*='Country']");
-
+    const placeOrderBtn = page.locator('.action__submit');
 
     await getUrl(page, "https://rahulshettyacademy.com/client/");
     console.log(await getTitle(page));
 
-    await userName.fill("creativestrikers@gmail.com");
+    await userName.fill(email);
     await password.fill("Abcd@1234");
     await signIn.click();
     await page.waitForLoadState('networkidle');
@@ -62,7 +64,12 @@ test.only("Assignment Test", async ({ browser }) => {
             break;
         }
     }
-    await page.pause();
+
+    expect (page.locator("label[type='text']")).toHaveText(email);
+    await placeOrderBtn.click();
+    const successMsg = page.locator("h1:has-text(' Thankyou for the order. ')").isVisible();
+    expect(successMsg).toBeTruthy();
+    //await page.pause();
 
 
 });
