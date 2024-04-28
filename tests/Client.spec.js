@@ -41,6 +41,9 @@ test.only("Assignment Test", async ({ browser }) => {
     }
 
     await cartLocator.click();
+    //Page Loads
+    await page.locator("div li").first().waitFor();
+    
     const isPresent =  page.locator ("h3:has-text('ZARA COAT 3')").isVisible();
     expect (isPresent).toBeTruthy();
 
