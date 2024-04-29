@@ -5,6 +5,7 @@ test("Locator Test", async ({ page }) => {
     clickByLabel(page,"Check me out if you Love IceCreams!");
     clickByLabel(page,"Employed");
     await page.getByLabel("Gender").selectOption("Female");
+    await page.getByPlaceholder("Password").fill("Hakuna Matata");
 
 });
 async function clickByLabel(page, locatorText) {
