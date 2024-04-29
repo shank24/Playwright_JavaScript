@@ -45,6 +45,7 @@ test.only("Assignment Test", async ({ browser }) => {
     }
 
     await cartLocator.click();
+
     //Page Loads
     await page.locator("div li").first().waitFor();
 
@@ -73,8 +74,7 @@ test.only("Assignment Test", async ({ browser }) => {
     const orderID = await orderIdLocator.textContent();
     console.log(orderID);
 
-    //await page.pause();
-
+    //Order Page
     await page.locator("button[routerlink*='myorders']").click();
     await page.locator("tbody").waitFor();
 
@@ -93,12 +93,13 @@ test.only("Assignment Test", async ({ browser }) => {
     const orderIdDetail = await page.locator(".col-text").textContent();
     expect (orderID.includes(orderIdDetail)).toBeTruthy();
 
+    const emailAtOrderPage = page.locator("div p:has-text(' creativestrikers@gmail.com ')");
+    expect (email.includes(emailAtOrderPage));
 
 
 });
 
 // Methods
-
 async function isVisible(radioBtn) {
     console.log(await radioBtn.isVisible());
 }
