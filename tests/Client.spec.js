@@ -72,7 +72,27 @@ test.only("Assignment Test", async ({ browser }) => {
     expect(successMsg).toBeTruthy();
     const orderID = await orderIdLocator.textContent();
     console.log(orderID);
+
     //await page.pause();
+
+    await page.locator("button[routerlink*='myorders']").click();
+    await page.locator("tbody").waitFor();
+
+    const rows = page.locator("tbody tr");
+    console.log(rows.count());
+
+
+    for (let index = 0; index < await rows.count(); index++) {
+        const orderNumber = await rows.nth(index).locator("th").textContent();
+        if (orderID.includes(orderNumber)) {
+            await rows.nth(index).locator("button").first().click();
+            break;
+        }
+    }
+
+    const orderIdDetail = await page.locator(".col-text").textContent();
+    expect (orderID.includes(orderIdDetail)).toBeTruthy();
+
 
 
 });

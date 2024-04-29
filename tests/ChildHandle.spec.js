@@ -12,6 +12,8 @@ test.only("Child Window Handle Test", async ({ browser }) => {
 
     //Wait For event to happen - a new page
     const [newPage]= await Promise.all([
+        //Listen for new page - Pending/Rejected/Fulfilled
+        
         context.waitForEvent('page'),
         documentLink.click(),
     ]) //New Page is opened
