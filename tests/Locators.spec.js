@@ -6,6 +6,8 @@ test("Locator Test", async ({ page }) => {
     clickByLabel(page,"Employed");
     await page.getByLabel("Gender").selectOption("Female");
     await page.getByPlaceholder("Password").fill("Hakuna Matata");
+    await page.getByRole("button", {name: 'Submit'}).click();
+
 
 });
 async function clickByLabel(page, locatorText) {
