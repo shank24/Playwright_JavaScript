@@ -22,21 +22,31 @@ test.beforeAll(async ({ browser }) => {
     await page.waitForLoadState('networkidle');
 
     //Getting Storage of all the Session
-    await context.storageState({path: 'state.json'});
+    await context.storageState({ path: 'state.json' });
 
     //Injecting state.json into a new browser
-    webContext = await browser.newContext({storageState: 'state.json'}); 
+    webContext = await browser.newContext({ storageState: 'state.json' });
+
+});
+
+test("Assignment Test 1", async () => {
+
+    
+    const page = await webContext.newPage();
+    await getUrl(page, "https://rahulshettyacademy.com/client/");
+
+    const cardTitle = page.locator(".card-body b");
+    console.log(await cardTitle.nth(0).textContent());
+    const titles = console.log(await cardTitle.allTextContents());
+    console.log(titles);
 
 });
 
 
-test.only("Assignment Test", async () => {
-
-    
+test("Assignment Test", async () => {
 
     //Sign In Locators
     const email = "creativestrikers@gmail.com";
-
 
     const page = await webContext.newPage();
     await getUrl(page, "https://rahulshettyacademy.com/client/");
@@ -115,7 +125,6 @@ test.only("Assignment Test", async () => {
 
     const emailAtOrderPage = page.locator("div p:has-text(' creativestrikers@gmail.com ')");
     expect(email.includes(emailAtOrderPage));
-
 
 });
 
