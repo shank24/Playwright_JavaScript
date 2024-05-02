@@ -1,6 +1,6 @@
 class APIUtils {
 
-    constructor(apiContext,loginPayload) {
+    constructor(apiContext, loginPayload) {
         this.apiContext = apiContext;
         this.loginPayload = loginPayload;
     }
@@ -37,4 +37,4 @@ class APIUtils {
     }
 }
 
-module.exports = {APIUtils};
+module.exports = { APIUtils };
