@@ -49,6 +49,4 @@ test("Place an Order API Test", async ({ page }) => {
 
     const emailAtOrderPage = page.locator("div p:has-text(' creativestrikers@gmail.com ')");
     expect(email.includes(emailAtOrderPage));
-
-
 });
