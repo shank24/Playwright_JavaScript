@@ -10,6 +10,7 @@ test('Security Test Intercept', async ({ page }) => {
 
     //Cart Locators
     const cardTitle = page.locator(".card-body b");
+    const blinkText = page.locator(".blink_me")
   
     await page.goto("https://rahulshettyacademy.com/client/");
 
@@ -20,16 +21,13 @@ test('Security Test Intercept', async ({ page }) => {
     await cardTitle.first().waitFor();
     await page.locator("button[routerlink*='myorders']").click();
 
-    //console.log(await cardTitle.nth(0).textContent());
-    //const titles = console.log(await cardTitle.allTextContents());
-    //console.log(titles);
-
-    
-    
+    //Request Interceptor
     await page.route(
         "https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=*",
     route => route.continue ({ url :'https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=663412e5a86f8f74dcd411f8'}),
     );
     await page.locator("button:has-text('View')").first().click();
-    await page.pause();
+    await expect(page.locator("p").last()).toHaveText("You are not authorize to view this order");
+    await expect(blinkText).toHaveText("You are not authorize to view this order");
+    
 });
