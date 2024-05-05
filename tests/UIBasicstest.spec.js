@@ -1,9 +1,11 @@
 const { test, expect } = require('@playwright/test');
 
-test("Browser Context Test", async ({ browser }) => {
+test.only("Browser Context Test", async ({ browser }) => {
 
     const context = await browser.newContext();
     const page = await context.newPage();
+    page.route('**/*.css', route => route.abort());
+
 
     const userName = page.locator('#username');
     const password = page.locator("[type='password']");
@@ -34,7 +36,7 @@ test("Browser Context Test", async ({ browser }) => {
 
 
 
-test.only("UI Controls Test", async ({ page }) => {
+test("UI Controls Test", async ({ page }) => {
 
 
     const userName = page.locator('#username');
