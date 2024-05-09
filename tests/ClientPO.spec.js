@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
+const {loginPage} = require('../pageObjects/loginPage');
 
 
 test.only("Assignment Test", async ({ browser }) => {
@@ -7,11 +7,9 @@ test.only("Assignment Test", async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
-    //Sign In Locators
-    const userName = page.locator("#userEmail");
-    const password = page.locator("#userPassword");
-    const signIn = page.locator('#login');
+    //Sign In Values
     const email = "creativestrikers@gmail.com";
+    const password ="Abcd@1234";
 
     //Cart Locators
     const products = page.locator(".card-body")
@@ -24,15 +22,12 @@ test.only("Assignment Test", async ({ browser }) => {
     const orderIdLocator = page.locator('.em-spacer-1 .ng-star-inserted');
 
     //Login Object
-    const loginPage = new loginPage(page);
-    await getUrl(page, "https://rahulshettyacademy.com/client/");
+    const loginPageObj = new loginPage(page);
+    loginPageObj.goTo();
+    loginPageObj.validLogin(email,password);
+    await page.waitForLoadState('networkidle');
     console.log(await getTitle(page));
 
-    await userName.fill(email);
-    await password.fill("Abcd@1234");
-    
-    await signIn.click();
-    await page.waitForLoadState('networkidle');
 
     //console.log(await cardTitle.nth(0).textContent());
     const titles = console.log(await cardTitle.allTextContents());
