@@ -48,11 +48,10 @@ test.only("Assignment Test", async ({ browser }) => {
 
     //Page Loads
     await page.locator("div li").first().waitFor();
-
     const isPresent = page.locator("h3:has-text('ZARA COAT 3')").isVisible();
     expect(isPresent).toBeTruthy();
-
     await checkOutBtn.click();
+
     await country.pressSequentially("Can");
     const dropDown = page.locator(".ta-results");
     await dropDown.waitFor();
