@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const { loginPage } = require('../pageObjects/loginPage');
 const { dashBoardPage } = require('../pageObjects/dashBoardPage');
 const { checkoutPage } = require('../pageObjects/checkoutPage');
+const { orderPage } = require('../pageObjects/orderPage');
 
 
 test.only("Assignment Test", async ({ browser }) => {
@@ -20,11 +21,10 @@ test.only("Assignment Test", async ({ browser }) => {
     const countryName = "Can";
 
     const country = page.locator("[placeholder*='Country']");
-    const placeOrderBtn = page.locator('.action__submit');
-    
-    
+
     //Order Locator
-    const orderIdLocator = page.locator('.em-spacer-1 .ng-star-inserted');
+    //const placeOrderBtn = page.locator('.action__submit');
+    //const orderIdLocator = page.locator('.em-spacer-1 .ng-star-inserted');
 
     //Login Page Object
     const loginPageObj = new loginPage(page);
@@ -42,18 +42,14 @@ test.only("Assignment Test", async ({ browser }) => {
     await checkoutPageObj.clickUntilCheckOutBtn();
     await checkoutPageObj.selectCountry(countryName);
 
+    //Order Page Object
+    const orderPageObj = new orderPage(page);
+    await orderPageObj.verifyEmail(email);
+    await orderPageObj.verifyOrderConfirmation();
+    const orderID = await orderPageObj.getOrderId();
+    await orderPageObj.clickOnOrders();
 
-    expect(page.locator("label[type='text']")).toHaveText(email);
-    await placeOrderBtn.click();
-    const successMsg = page.locator("h1:has-text(' Thankyou for the order. ')").isVisible();
-    expect(successMsg).toBeTruthy();
-    const orderID = await orderIdLocator.textContent();
-    console.log(orderID);
-
-    //Order Page
-    await page.locator("button[routerlink*='myorders']").click();
-    await page.locator("tbody").waitFor();
-
+    //Thank You Page
     const rows = page.locator("tbody tr");
     console.log(rows.count());
 
