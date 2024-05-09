@@ -14,6 +14,11 @@ class loginPage {
     await this.userName.fill(email);
     await this.password.fill(password);
     await this.signInBtn.click();
+    await this.page.waitForLoadState('networkidle');
+    }
+
+    async getTitleOfPage(page){
+       console.log(await this.page.title());
     }
 }
 

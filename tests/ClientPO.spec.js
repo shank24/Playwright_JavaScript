@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
-const {loginPage} = require('../pageObjects/loginPage');
+const { loginPage } = require('../pageObjects/loginPage');
+const { dashBoardPage } = require('../pageObjects/dashBoardPage');
 
 
 test.only("Assignment Test", async ({ browser }) => {
@@ -9,40 +10,27 @@ test.only("Assignment Test", async ({ browser }) => {
 
     //Sign In Values
     const email = "creativestrikers@gmail.com";
-    const password ="Abcd@1234";
+    const password = "Abcd@1234";
 
     //Cart Locators
-    const products = page.locator(".card-body")
-    const cardTitle = page.locator(".card-body b");
     const productName = 'ZARA COAT 3';
-    const cartLocator = page.locator("[routerlink*='cart']");
+
     const checkOutBtn = page.locator("text=Checkout");
     const country = page.locator("[placeholder*='Country']");
     const placeOrderBtn = page.locator('.action__submit');
     const orderIdLocator = page.locator('.em-spacer-1 .ng-star-inserted');
 
-    //Login Object
+    //Login Page Object
     const loginPageObj = new loginPage(page);
-    loginPageObj.goTo();
-    loginPageObj.validLogin(email,password);
-    await page.waitForLoadState('networkidle');
-    console.log(await getTitle(page));
+    await loginPageObj.goTo();
+    await loginPageObj.validLogin(email, password);
+    await loginPageObj.getTitleOfPage(page);
 
+    //Dashboard Page Object
+    const dashPageObj = new dashBoardPage(page);
+    await dashPageObj.searchProduct(productName);
+    await dashPageObj.navigateToCart();
 
-    //console.log(await cardTitle.nth(0).textContent());
-    const titles = console.log(await cardTitle.allTextContents());
-    console.log(titles);
-    const countOfProducts = await products.count();
-
-    for (let i = 0; i < countOfProducts; i++) {
-        if (await products.nth(i).locator('b').textContent() == productName) {
-            //Add To cart
-            await products.nth(i).locator("text= Add To Cart").click();
-            break;
-        }
-    }
-
-    await cartLocator.click();
 
     //Page Loads
     await page.locator("div li").first().waitFor();
@@ -65,7 +53,7 @@ test.only("Assignment Test", async ({ browser }) => {
         }
     }
 
-    expect (page.locator("label[type='text']")).toHaveText(email);
+    expect(page.locator("label[type='text']")).toHaveText(email);
     await placeOrderBtn.click();
     const successMsg = page.locator("h1:has-text(' Thankyou for the order. ')").isVisible();
     expect(successMsg).toBeTruthy();
@@ -89,10 +77,10 @@ test.only("Assignment Test", async ({ browser }) => {
     }
 
     const orderIdDetail = await page.locator(".col-text").textContent();
-    expect (orderID.includes(orderIdDetail)).toBeTruthy();
+    expect(orderID.includes(orderIdDetail)).toBeTruthy();
 
     const emailAtOrderPage = page.locator("div p:has-text(' creativestrikers@gmail.com ')");
-    expect (email.includes(emailAtOrderPage));
+    expect(email.includes(emailAtOrderPage));
 
 
 });
