@@ -1,14 +1,10 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../pageObjects/LoginPage');
-const { DashboardPage } = require('../pageObjects/DashboardPage');
-const { CheckoutPage } = require('../pageObjects/CheckoutPage');
-const { OrderPage } = require('../pageObjects/OrderPage');
-const { ThankyouPage } = require('../pageObjects/ThankyouPage');
+const {POManager} = require('../pageObjects/POManager');
 
-test.only("Assignment Test", async ({ browser }) => {
 
-    const context = await browser.newContext();
-    const page = await context.newPage();
+test.only("Assignment Test", async ({ page }) => {
+
+    const POManagerObj = new POManager(page);
 
     //Assertion Values
     const email = "creativestrikers@gmail.com";
@@ -17,30 +13,30 @@ test.only("Assignment Test", async ({ browser }) => {
     const countryName = "Can";
 
     //Login Page Object
-    const loginPageObj = new LoginPage(page);
+    const loginPageObj = POManagerObj.getLoginPage();
     await loginPageObj.goTo();
     await loginPageObj.validLogin(email, password);
     await loginPageObj.getTitleOfPage(page);
 
     //Dashboard Page Object
-    const dashPageObj = new DashboardPage(page);
+    const dashPageObj = POManagerObj.getDashboardPage();
     await dashPageObj.searchProduct(productName);
     await dashPageObj.navigateToCart();
 
     //Checkout Page Object
-    const checkoutPageObj = new CheckoutPage(page);
-    await checkoutPageObj.clickUntilCheckOutBtn();
+    const checkoutPageObj = POManagerObj.getCheckoutPage();
+    await checkoutPageObj.clickUntilCheckOutBtn(productName);
     await checkoutPageObj.selectCountry(countryName);
 
     //Order Page Object
-    const orderPageObj = new OrderPage(page);
+    const orderPageObj = POManagerObj.getOrderPage();
     await orderPageObj.verifyEmail(email);
     await orderPageObj.verifyOrderConfirmation();
     const orderID = await orderPageObj.getOrderId();
     await orderPageObj.clickOnOrders();
 
     //Thank You Page Object
-    const thankYouPageObj = new ThankyouPage(page);
+    const thankYouPageObj = POManagerObj.getThankyouPage();
     await thankYouPageObj.verifyOrderId(orderID);
     await thankYouPageObj.verifyOrderAndEmail(orderID, email);
 

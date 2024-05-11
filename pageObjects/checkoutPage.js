@@ -1,8 +1,9 @@
+const { expect } = require("@playwright/test");
+
 class CheckoutPage {
     constructor(page) {
         this.page = page;
         this.firstProduct = page.locator("div li");
-        this.item = page.locator("h3:has-text('ZARA COAT 3')");
         this.checkoutBtn = page.locator("text=Checkout");
         this.country = page.locator("[placeholder*='Country']");
         this.placeOrderBtn = page.locator('.action__submit');
@@ -10,12 +11,16 @@ class CheckoutPage {
         this.dropDownLocator = page.locator(".ta-results");
     }
 
-    async clickUntilCheckOutBtn() {
+    async clickUntilCheckOutBtn(productName) {
         await this.firstProduct.first().waitFor();
-        await this.item.isVisible();
+        const bool = await this.getProductLocator(productName).isVisible();
+        expect(bool).toBeTruthy();
         await this.checkoutBtn.click();
     }
 
+    getProductLocator(productName) {
+        return this.page.locator("h3:has-text('" + productName + "')");
+    }
     async selectCountry(countryName) {
         await this.country.pressSequentially(countryName);
         const dropDown = this.dropDownLocator;
