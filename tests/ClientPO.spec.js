@@ -14,17 +14,11 @@ test.only("Assignment Test", async ({ browser }) => {
     const email = "creativestrikers@gmail.com";
     const password = "Abcd@1234";
 
-    //Cart Locators
+    //Cart Variable
     const productName = 'ZARA COAT 3';
 
-    //CheckOut Locator
+    //CheckOut Variable
     const countryName = "Can";
-
-    const country = page.locator("[placeholder*='Country']");
-
-    //Order Locator
-    //const placeOrderBtn = page.locator('.action__submit');
-    //const orderIdLocator = page.locator('.em-spacer-1 .ng-star-inserted');
 
     //Login Page Object
     const loginPageObj = new loginPage(page);
