@@ -1,4 +1,4 @@
-class checkoutPage {
+class CheckoutPage {
     constructor(page) {
         this.page = page;
         this.firstProduct = page.locator("div li");
@@ -34,4 +34,4 @@ class checkoutPage {
 }
 
 
-module.exports = { checkoutPage };
+module.exports = { CheckoutPage };

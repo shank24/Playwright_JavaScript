@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
-class orderPage {
+
+class OrderPage {
     constructor(page) {
         this.page = page;
         this.email = page.locator("label[type='text']");
@@ -32,4 +33,4 @@ class orderPage {
     }
 }
 
-module.exports = { orderPage };
+module.exports = { OrderPage };

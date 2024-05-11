@@ -1,9 +1,9 @@
 const { test, expect } = require('@playwright/test');
-const { loginPage } = require('../pageObjects/loginPage');
-const { dashBoardPage } = require('../pageObjects/dashBoardPage');
-const { checkoutPage } = require('../pageObjects/checkoutPage');
-const { orderPage } = require('../pageObjects/orderPage');
-const { thankYouPage } = require('../pageObjects/thankYouPage');
+const { LoginPage } = require('../pageObjects/LoginPage');
+const { DashboardPage } = require('../pageObjects/DashboardPage');
+const { CheckoutPage } = require('../pageObjects/CheckoutPage');
+const { OrderPage } = require('../pageObjects/OrderPage');
+const { ThankyouPage } = require('../pageObjects/ThankyouPage');
 
 test.only("Assignment Test", async ({ browser }) => {
 
@@ -17,30 +17,30 @@ test.only("Assignment Test", async ({ browser }) => {
     const countryName = "Can";
 
     //Login Page Object
-    const loginPageObj = new loginPage(page);
+    const loginPageObj = new LoginPage(page);
     await loginPageObj.goTo();
     await loginPageObj.validLogin(email, password);
     await loginPageObj.getTitleOfPage(page);
 
     //Dashboard Page Object
-    const dashPageObj = new dashBoardPage(page);
+    const dashPageObj = new DashboardPage(page);
     await dashPageObj.searchProduct(productName);
     await dashPageObj.navigateToCart();
 
     //Checkout Page Object
-    const checkoutPageObj = new checkoutPage(page);
+    const checkoutPageObj = new CheckoutPage(page);
     await checkoutPageObj.clickUntilCheckOutBtn();
     await checkoutPageObj.selectCountry(countryName);
 
     //Order Page Object
-    const orderPageObj = new orderPage(page);
+    const orderPageObj = new OrderPage(page);
     await orderPageObj.verifyEmail(email);
     await orderPageObj.verifyOrderConfirmation();
     const orderID = await orderPageObj.getOrderId();
     await orderPageObj.clickOnOrders();
 
     //Thank You Page Object
-    const thankYouPageObj = new thankYouPage(page);
+    const thankYouPageObj = new ThankyouPage(page);
     await thankYouPageObj.verifyOrderId(orderID);
     await thankYouPageObj.verifyOrderAndEmail(orderID, email);
 

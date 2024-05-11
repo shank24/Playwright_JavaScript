@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-class thankYouPage {
+class ThankyouPage {
     constructor(page) {
         this.page = page;
         this.rows = page.locator("tbody tr");
@@ -26,4 +26,4 @@ class thankYouPage {
     }
 }
 
-module.exports = { thankYouPage };
+module.exports = { ThankyouPage };
