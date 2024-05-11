@@ -39,20 +39,3 @@ test.only("Assignment Test", async ({ page }) => {
     await thankYouPageObj.verifyOrderAndEmail(orderID, testData.email);
 
 });
-
-// Methods
-async function isVisible(radioBtn) {
-    console.log(await radioBtn.isVisible());
-}
-
-async function isChecked(radioBtn) {
-    console.log(await radioBtn.isChecked());
-}
-
-async function getUrl(page, url) {
-    await page.goto(url);
-}
-
-async function getTitle(page) {
-    return await page.title();
-}
