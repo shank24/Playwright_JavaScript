@@ -33,7 +33,7 @@ async function readExcel(worksheet, searchText) {
 //update Mango Price to 350. 
 //writeExcelTest("Mango",350,{rowChange:0,colChange:2},"/Users/shankykalra/Downloads/download.xlsx");
 
-test('Upload download excel validation', async ({ page }) => {
+test('@WEB Upload download excel validation', async ({ page }) => {
   const textSearch = 'Mango';
   const updateValue = '350';
   await page.goto("https://rahulshettyacademy.com/upload-download-test/index.html");

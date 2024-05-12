@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe.configure({mode:'parallel'})
-test("Pop Validations Test", async ({ page }) => {
+test("@WEB Pop Validations Test", async ({ page }) => {
 
     /*await page.goto("https://www.google.com/");
     await page.goBack();
@@ -31,7 +31,7 @@ test("Pop Validations Test", async ({ page }) => {
 });
 
 
-test("Screenshot & Visual Comparison Test", async ({ page }) => {
+test("@WEB Screenshot & Visual Comparison Test", async ({ page }) => {
 
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
     await expect(page.locator("#displayed-text")).toBeVisible();

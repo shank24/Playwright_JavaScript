@@ -29,7 +29,7 @@ test.beforeAll(async ({ browser }) => {
 
 });
 
-test("Assignment Test 1", async () => {
+test("@API Assignment Test 1", async () => {
 
     
     const page = await webContext.newPage();
@@ -43,7 +43,7 @@ test("Assignment Test 1", async () => {
 });
 
 
-test("Assignment Test", async () => {
+test("@API Assignment Test", async () => {
 
     //Sign In Locators
     const email = "creativestrikers@gmail.com";

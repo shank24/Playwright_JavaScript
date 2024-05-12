@@ -13,7 +13,7 @@ test.beforeAll(async () => {
 
 });
 
-test("Place an Order API Test", async ({ page }) => {
+test("@API Place an Order API Test", async ({ page }) => {
 
 
     //Injecting token into Session

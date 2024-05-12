@@ -8,7 +8,7 @@ const testData = JSON.parse(JSON.stringify(require('../utils/placeOrderTestData.
 
 for (const data of testData) {
 
-    test(`Buy Order Test For ${data.productName}`, async ({ page }) => {
+    test(`@WEB Buy Order Test For ${data.productName}`, async ({ page }) => {
 
         //Page Object Manager Object Instantiation
         const POManagerObj = new POManager(page);
@@ -44,7 +44,7 @@ for (const data of testData) {
     });
 }
 
-customTestFixture.only('Order Test Via Fixture', async ({ page, testDataOrder }) => {
+customTestFixture.only('@WEB Order Test Via Fixture', async ({ page, testDataOrder }) => {
 
     //Page Object Manager Object Instantiation
     const POManagerObj = new POManager(page);
