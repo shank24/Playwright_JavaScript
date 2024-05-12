@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
+test.describe.configure({mode:'parallel'})
 test("Pop Validations Test", async ({ page }) => {
 
     /*await page.goto("https://www.google.com/");
