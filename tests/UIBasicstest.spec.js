@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { request } = require('http');
 
-test.only("Browser Context Test", async ({ browser }) => {
+test.only("@WEB Browser Context Test", async ({ browser }) => {
 
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -45,7 +45,7 @@ test.only("Browser Context Test", async ({ browser }) => {
 
 
 
-test("UI Controls Test", async ({ page }) => {
+test("@WEB UI Controls Test", async ({ page }) => {
 
 
     const userName = page.locator('#username');

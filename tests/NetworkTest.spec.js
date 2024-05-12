@@ -1,6 +1,6 @@
 const { test, expect, request } = require('@playwright/test');
 
-test('Security Test Intercept', async ({ page }) => {
+test('@WEB Security Test Intercept', async ({ page }) => {
 
     //Sign In Locators
     const userName = page.locator("#userEmail");

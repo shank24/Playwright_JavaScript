@@ -15,7 +15,7 @@ test.beforeAll(async () => {
 
 });
 
-test("Netwrok Intercept Test", async ({ page }) => {
+test("@API Network Intercept Test", async ({ page }) => {
 
 
     //Injecting token into Session
