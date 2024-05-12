@@ -1,6 +1,15 @@
-{
-    "email" : "creativestrikers@gmail.com",
-    "password" : "Abcd@1234",
-    "productName" : "ZARA COAT 3",
-    "countryName" : "Can"
-}
+[
+    {
+        "email": "creativestrikers@gmail.com",
+        "password": "Abcd@1234",
+        "productName": "ZARA COAT 3",
+        "countryName": "Can"
+    },
+
+    {
+        "email": "anshika@gmail.com",
+        "password": "Iamking@000",
+        "productName": "ADIDAS ORIGINAL",
+        "countryName": "Can"
+    }
+]
