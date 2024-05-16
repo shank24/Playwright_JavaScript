@@ -1,10 +1,14 @@
 Feature: Ecommerce Validation
 
     @Regression
-    Scenario: Placing The Order
-        Given When I login to the Ecommerce application with "anshika@gmail.com" and "Iamking@000"
-        When I add product "ZARA COAT 3"
-        Then I verify "ZARA COAT 3" is displayed succesfully for "Canada"
-        When Enter valid details "anshika@gmail.com" and placed the order
-        Then I verify the order is present in the order history for "anshika@gmail.com"
-        
+    Scenario Outline: Placing The Order
+        Given When I login to the Ecommerce application with "<Username>" and "<Password>"
+        When I add product "<Product>"
+        Then I verify "<Product>" is displayed succesfully for "<Country>"
+        When Enter valid details "<Username>" and placed the order
+        Then I verify the order is present in the order history for "<Username>"
+
+        Examples:
+            | Username          | Password    | Product     | Country |
+            | anshika@gmail.com | Iamking@000 | ZARA COAT 3 | Canada  |
+            | anshika@gmail.com | Iamking@000 | ZARA COAT 4 | Canada  |
