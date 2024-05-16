@@ -1,24 +1,12 @@
 const { When, Then, Given } = require('@cucumber/cucumber');
-const { POManager } = require('../../pageObjects/POManager');
-const playwright = require('@playwright/test');
 
 let orderID;
 Given('When I login to the Ecommerce application with {string} and {string}', { timeout: 100 * 1000 }, async function (username, password) {
-
-    const browser = await playwright.chromium.launch({
-        headless:false
-    });
-    const context = await browser.newContext();
-    const page = await context.newPage();
-
-    //Page Object Manager Object Instantiation
-    this.POManagerObj = new POManager(page);
-
     //Login Page Object
     const loginPageObj = this.POManagerObj.getLoginPage();
     await loginPageObj.goTo();
     await loginPageObj.validLogin(username, password);
-    await loginPageObj.getTitleOfPage(page);
+    await loginPageObj.getTitleOfPage(this.page);
 
 });
 
