@@ -8,4 +8,4 @@ Feature: Ecommerce Validation
         Examples:
             | Username          | Password    |
             | anshika@gmail.com | Iamking@000 |
-            | abc@gmail.com | Iamking@000 |
+            | abc@gmail.com     | Iamking@000 |

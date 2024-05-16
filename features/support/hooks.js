@@ -21,7 +21,7 @@ BeforeStep({ tags: "@foo" }, function () {
 AfterStep(async function ({ result }) {
     // This hook will be executed after all steps, and take a screenshot on step failure
     if (result.status === Status.FAILED) {
-        await this.page.screenshot({path: 'screenshot1.png'});
+        await this.page.screenshot({ path: 'screenshot1.png' });
     }
 });
 
