@@ -1,5 +1,6 @@
 Feature: Ecommerce Validation
 
+    @Regression
     Scenario: Placing The Order
         Given When I login to the Ecommerce application with "anshika@gmail.com" and "Iamking@000"
         When I add product "ZARA COAT 3"

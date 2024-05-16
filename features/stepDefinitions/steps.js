@@ -1,4 +1,5 @@
 const { When, Then, Given } = require('@cucumber/cucumber');
+const { expect } = require('@playwright/test');
 
 let orderID;
 Given('When I login to the Ecommerce application with {string} and {string}', { timeout: 100 * 1000 }, async function (username, password) {
@@ -37,5 +38,25 @@ Then('I verify the order is present in the order history for {string}', async fu
     const thankYouPageObj = this.POManagerObj.getThankyouPage();
     await thankYouPageObj.verifyOrderId(orderID);
     await thankYouPageObj.verifyOrderAndEmail(orderID, email);
+});
+
+Given('When I login to the Ecommerce2 application with {string} and {string}', async function (username, password) {
+
+    const userName1 = this.page.locator('#username');
+    const password1 = this.page.locator("[type='password']");
+    const signIn = this.page.locator('#signInBtn');
+
+    await this.page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    console.log(await this.page.title());
+
+    await userName1.fill(username);
+    await password1.fill(password);
+    await signIn.click();
+});
+
+Then('Verify Error message is diplayed', async function () {
+    let not_Found_Locator = "[style*='block']";
+    console.log(await this.page.locator(not_Found_Locator).textContent());
+    await expect(this.page.locator(not_Found_Locator)).toContainText('Incorrect');
 });
 
